@@ -1,0 +1,13 @@
+package cn.ssm.service;
+
+import java.util.List;
+
+import cn.ssm.po.QxMenuCustom;
+import cn.ssm.po.QxUserCustom;
+
+public interface SysService {
+
+	/**µÃµ½²Ëµ¥
+	 */
+	public List<QxMenuCustom> selectMenuByUser(QxUserCustom qxUserCustom) throws Exception;
+}

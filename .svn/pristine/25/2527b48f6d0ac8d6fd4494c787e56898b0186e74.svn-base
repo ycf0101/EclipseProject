@@ -1,0 +1,34 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <link href="../common/css/login.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<img src="../common/image/logo.png" alt="logo" id="logo" width="700" height="60" />
+<div id="login">
+    <form action="${pageContext.request.contextPath }/sys/login.action">
+     <table cellpadding="0" cellspacing="20" id="mytab">
+        <tr>
+            <td>登录名:</td>
+            <td><input type="text" name="loginname" id="loginname" placeholder="请填写登录名" required="required" value="admin"/></td>
+        </tr>
+        <tr>
+            <td>密码:</td>
+            <td><input type="password" name="loginpassword" id="loginpassword" placeholder="请填写密码" required="required" value="0"/></td>
+        </tr>
+        <tr>
+            <td>验证码:</td>
+            <td><input type="text" id="yanzheng" placeholder="验证码" required="required" value="abcd"/>&nbsp;<p id="yanz"></p>&nbsp;<a href="#">看不清，换一张</a></td>
+        </tr>
+         <tr>
+             <td colspan="2" align="center"><input type="submit" name="sub" id="sub" value="登录"/></td>
+         </tr>
+      </table>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+package cn.ssm.handlerInterceptor;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+
+import cn.ssm.po.QxUserCustom;
+
+public class LogInterceptor implements HandlerInterceptor{
+
+	@Override
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)throws Exception {
+		String result = "操作结果为：";
+		if(ex == null)
+			result+="成功";
+		else
+			result+="失败";
+		System.out.println(result);
+		System.out.println("当前时间为："+new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date()));
+		System.out.println("----------------------------日志结束---------------------------");
+	}
+
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
+			throws Exception {
+	}
+
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		System.out.println("-------------------------开始打印日志-------------------------");
+		if(request.getSession()!=null && request.getSession().getAttribute("user")!=null)
+			System.out.println("操作员:"+((QxUserCustom)request.getSession().getAttribute("user")).getLoginname());
+		String parameters = request.getQueryString();
+		//有参数
+		if(parameters !=null && parameters.length()>0){
+			//多个参数
+			if(parameters.indexOf("&")>=0){
+				String parameterArray[] = parameters.split("&");
+				int i = 1;
+				for(String keyvalue :parameterArray ){
+					System.out.println("第"+i+"参数为："+keyvalue.substring(0,keyvalue.indexOf("="))+",值为："+ keyvalue.substring(keyvalue.indexOf("=")+1));
+					i++;
+				}
+			}
+			else
+				System.out.println("参数为："+parameters.substring(0,parameters.indexOf("="))+",值为："+ parameters.substring(parameters.indexOf("=")+1));
+		}
+		String methodAction = request.getRequestURL().substring(request.getRequestURL().lastIndexOf("/")+1);
+		System.out.println("调用的方法为："+methodAction.substring(0, methodAction.lastIndexOf(".")));
+		return true;
+	}
+
+}

@@ -1,0 +1,24 @@
+package cn.ssm.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import cn.ssm.mapper.QxMenuCustomMapper;
+import cn.ssm.po.QxMenuCustom;
+import cn.ssm.po.QxUserCustom;
+import cn.ssm.service.SysService;
+
+public class SysServiceImpl implements SysService{
+
+	@Autowired
+	private QxMenuCustomMapper qxMenuCustomMapper;
+	
+	@Override
+	public List<QxMenuCustom> selectMenuByUser(QxUserCustom qxUserCustom)
+			throws Exception {
+		List<QxMenuCustom> qxMenuList = qxMenuCustomMapper.selectMenuByUser(qxUserCustom);
+		return qxMenuList;
+	}
+
+}

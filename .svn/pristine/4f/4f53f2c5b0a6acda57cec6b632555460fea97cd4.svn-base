@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ssm.mapper.QxMenuCustomMapper">
+
+	<select id="selectUser" parameterType="cn.ssm.po.QxUserCustom" resultType="cn.ssm.po.QxUserCustom">
+		select *  from qx_user where loginname =  ${loginname} and loginpassword = ${loginpassword}
+	</select>
+	
+	<select id="selectMenuByUser" parameterType="cn.ssm.po.QxUserCustom" resultType="cn.ssm.po.QxMenuCustom">
+				select *
+		  from qx_menu
+		 where id in (select t.privilegeaccessvalue menuid
+		                from qx_privilege t
+		               where t.privilegeaccess = 0
+		                 and t.privilegeoperation = 1
+		                 and t.privilegemastervalue in
+		                     (select roleid
+		                        from qx_userrole
+		                       where userid = (select id
+		                                         from qx_user
+		                                        where loginname = #{loginname}
+		                                          and loginpassword = #{loginpassword})))
+		 start with fatherid is null
+		connect by prior qx_menu.id = qx_menu.fatherid
+				
+	</select>
+
+</mapper>

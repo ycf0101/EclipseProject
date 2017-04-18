@@ -1,0 +1,9 @@
+package cn.ssm.po;
+
+/**自定义包装类
+ */
+public class QxMenuCustom extends  QxMenu{
+	
+	
+
+}

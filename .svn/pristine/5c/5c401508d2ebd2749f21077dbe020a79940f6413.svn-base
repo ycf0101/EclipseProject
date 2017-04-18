@@ -1,0 +1,67 @@
+package cn.ssm.handlerInterceptor;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+
+import cn.ssm.commons.utils.CommonUilts;
+import cn.ssm.po.sys.Log;
+import cn.ssm.po.sys.QxUserCustom;
+import cn.ssm.service.SysService;
+
+public class LogInterceptor implements HandlerInterceptor{
+	@Autowired
+	private SysService sysService;
+	
+	Log log = null;
+	@Override
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)throws Exception {
+		log = new Log();
+		log.setLogid(CommonUilts.getUUID());
+		
+		if(request.getSession()!=null && request.getSession().getAttribute("user")!=null)
+			log.setUsername(((QxUserCustom)request.getSession().getAttribute("user")).getLoginname());
+		String methodAction = request.getRequestURL().substring(request.getRequestURL().lastIndexOf("/")+1);
+		log.setOperation(methodAction.substring(0, methodAction.lastIndexOf(".")));
+		if(ex == null)
+			log.setResult("成功");
+		else{
+			log.setResult("失败");
+			log.setRemark(ex.getMessage());
+		}
+		log.setCreatedate(new Date());
+		sysService.insertLog(log);
+	}
+
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
+			throws Exception {
+	}
+
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		/*String parameters = request.getQueryString();
+		//有参数
+		if(parameters !=null && parameters.length()>0){
+			//多个参数
+			if(parameters.indexOf("&")>=0){
+				String parameterArray[] = parameters.split("&");
+				int i = 1;
+				for(String keyvalue :parameterArray ){
+					System.out.println("第"+i+"参数为："+keyvalue.substring(0,keyvalue.indexOf("="))+",值为："+ keyvalue.substring(keyvalue.indexOf("=")+1));
+					i++;
+				}
+			}
+			else
+				System.out.println("参数为："+parameters.substring(0,parameters.indexOf("="))+",值为："+ parameters.substring(parameters.indexOf("=")+1));
+		}*/
+		return true;
+	}
+
+}

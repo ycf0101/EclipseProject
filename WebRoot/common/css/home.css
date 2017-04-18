@@ -1,0 +1,45 @@
+*{padding: 0; margin: 0; text-underline: none;}
+
+/**
+home页面的CSS样式
+*/
+#yyhome_content_top{ border: 3px solid #e0d6d6; width: 1200px; height:180px; margin: 20px auto;
+border-radius: 20px;}
+a:hover{ color: red;}
+.yyhome_conUl{ margin-top: 50px;}
+.yyhome_conUl li{ float: left; padding-left: 66px; background: url("") no-repeat; overflow: hidden; }
+.yyhome_conUl li p{ margin-bottom: 6px;}
+.yyhome_conUl li i{font-size: 40px; color: #FF5722;}
+.yyhome_content_topP{background: #e7e1cd;height: 30px; border-radius: 10px;line-height: 30px; padding-left: 20px;}
+#yyhome_content_bootom{width: 1400px;}
+#yyhome_content_bottomL{ float: left; width: 570px; height: 400px; margin-left: 60px; border: 3px solid #e0d6d6;border-radius: 20px;}
+.yyhome_content_bootmpLUl{ margin-top: 30px; margin-left: 30px;}
+.yyhome_content_bootmpLUl li{ padding-top: 20px;}
+.yyhome_content_bootmpLUl li i{ font-size: 24px; color: #FF5722; margin-right: 6px;}
+#yyhome_content_bottomR{ margin-left: 60px; float: left;width: 570px; height: 400px;border: 3px solid #e0d6d6;border-radius: 20px;}
+.yyhome_content_bootmpRUl{margin-top: 30px; margin-left: 30px;}
+.yyhome_content_bootmpRUl li{ padding-top: 20px;}
+.yyhome_content_bootmpRUl li i{ font-size: 24px; color: #FF5722; margin-right: 6px;}
+#yybootom{ clear: both;}
+
+
+/**
+NewProject页面的CSS样式
+*/
+#yyNewProject_all{ width: 1200px; height: 600px; border: 3px solid #e0d6d6; border-radius: 20px; margin: 20px auto;}
+.yyNewProject_allP{ height: 30px; line-height: 30px; background: #e7e1cd; border-radius: 10px; padding-left: 30px;}
+.yy_back{ margin-left: 1000px;}
+#yyNewProject_L{margin-left: 40px;}
+.yyNewProject_allUl{ margin-top: 30px;}
+.yyNewProject_allUl li{ padding-top: 30px;}
+.yy_gg{ margin-right: 20px; font-size: 14px;}
+.yyNewProject_allUl li input{ width: 180px; height: 24px;}
+
+
+/**
+ListProject页面的CSS样式
+*/
+#yy_ListProject{ border: 3px solid #e0d6d6; border-radius: 20px; width: 1200px; height: 600px; margin: 40px auto;}
+#yy_ListProject_main{ margin: 30px auto;}
+.yy_ListProject_table{ width: 1000px; margin: 0 auto;}
+.yy_ListProject_table td,.yy_ListProject_table th{ height:30px;}
